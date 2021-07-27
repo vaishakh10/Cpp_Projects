@@ -1,0 +1,63 @@
+//Convert Decimal to ternary and write corresponding character in reverse order without using standard libraray num to string and string reversal function
+
+
+#include <cstdio>
+#include <iostream>
+#include <math.h>
+#include<string> 
+using namespace std;
+
+
+void reverseStr(string& str)
+{
+    int n = str.length();
+ 
+    for (int i = 0; i < n / 2; i++) // to swap charatcters from two corners
+        swap(str[i], str[n - i - 1]);
+}
+void replaceStr(string& str){
+  int n = str.length();
+  for (int i = 0; i < n ; i++)
+  {
+    char val;
+    if(str[i] == '0'){
+    str[i] = 'I';
+    }else if(str[i] == '1'){
+      str[i] = 'A';
+    }else if(str[i] == '2'){
+      str[i] = 'V';
+    }
+  }
+}
+
+int convert_base(int v, int b){ 
+
+    if (v == 0) return 0;   
+    else 
+        return (v%b+10*convert_base(v/b,b));    
+}
+
+void convert(int Decimal) // Function to convert the decimal to ternary
+{
+	
+  int result;
+	if (Decimal != 0) {
+		result = convert_base(Decimal,3);
+	}
+  
+  string res =  to_string(result);
+	reverseStr(res);
+  replaceStr(res);
+
+  cout << "The corresponding character after converting "
+		<< Decimal << " to ternary is: " << res;
+}
+
+int main()
+{
+	int Decimal;
+    cout<< "Enter the number"<< endl;
+    cin>> Decimal;
+	convert(Decimal);
+	return 0;
+}
